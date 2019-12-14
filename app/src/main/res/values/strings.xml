@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">decl_tweet</string>
+
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string>
+
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="ok">OK</string>
+</resources>
