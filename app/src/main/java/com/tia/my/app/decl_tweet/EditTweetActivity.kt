@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -26,6 +27,27 @@ class EditTweetActivity : AppCompatActivity() {
         setContentView(R.layout.tweet_edit)
 
         val prefs = getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
+        var reSet = false
+
+        if (prefs.getString(PREF_LAST_DONE_DATE, "").toString() == Date().toDateString() ) {
+            val c = prefs.getInt("todo-count", 0)
+            if (c != 0) {
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.cancelAll()
+
+                tweetEditLayout.removeViewAt(tweetEditLayout.childCount - 2)
+
+                for (i in 0..c-1) {
+                    var editText = EditText(this)
+                    val a = prefs.getString("todo-${i}", "error").toString()
+                    val b = Editable.Factory.getInstance().newEditable(a)
+                    println("hogehoge" + a)
+                    editText.setText(a)
+                    tweetEditLayout.addView(editText, tweetEditLayout.childCount - 1)
+                }
+                reSet = true
+            }
+        }
 
         AddButton.setOnClickListener(View.OnClickListener {
             tweetEditLayout.addView(EditText(this), tweetEditLayout.childCount - 1)
@@ -58,6 +80,10 @@ class EditTweetActivity : AppCompatActivity() {
             edit.putInt("todo-count", c)
             edit.putString(PREF_LAST_DONE_DATE, Date().toDateString())
             edit.apply()
+
+            if (reSet) {
+                prepend = "修正版\n" + prepend
+            }
 
             intent.setData(Uri.parse(schemeUri + "?message=" + prepend))
             startActivity(intent)

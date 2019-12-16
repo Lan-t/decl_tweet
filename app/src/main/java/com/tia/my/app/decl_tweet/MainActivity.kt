@@ -1,22 +1,13 @@
 package com.tia.my.app.decl_tweet
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.IllegalArgumentException
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -100,53 +91,8 @@ class MainActivity : AppCompatActivity() {
             a.apply()
         })
 
-        testButton.setOnClickListener(View.OnClickListener {
-
-//            val notificationManager =
-//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//            val name = "decl_tweet"
-//            val id = "test-id-1"
-//            val notifiDescription = "desc"
-//            val channel_name = "test-channel"
-//
-//
-//            if (Build.VERSION.SDK_INT >= 26) {
-//
-//                if (notificationManager.getNotificationChannel(channel_name) == null) {
-//                    val channel = NotificationChannel(
-//                        "channel-id",
-//                        "channelのid",
-//                        NotificationManager.IMPORTANCE_DEFAULT
-//                    )
-//                    channel.apply {
-//                        description = notifiDescription
-//                    }
-//                    channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-//
-//                    notificationManager.createNotificationChannel(channel)
-//                }
-//
-//                val notifi = NotificationCompat.Builder(this, id).apply {
-//                    setSmallIcon(R.drawable.ic_launcher_background)
-//                    setContentTitle("titleeeee")
-//                    setContentText("contentttttttttttttt")
-//                    setAutoCancel(false)
-//                    setChannelId(id)
-//                }.build()
-//
-//                notifi.flags = Notification.FLAG_NO_CLEAR
-//
-//                notificationManager.notify(99, notifi)
-//            } else {
-//                val notifi = NotificationCompat.Builder(this, id).apply {
-//                    setSmallIcon(R.drawable.ic_launcher_background)
-//                }.build()
-//
-//                notifi.flags = Notification.FLAG_NO_CLEAR
-//
-//                notificationManager.notify(99, notifi)
-//            }
+        reEditButton.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, EditTweetActivity::class.java))
         })
     }
 }
