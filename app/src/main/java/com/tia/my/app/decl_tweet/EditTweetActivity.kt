@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.renderscript.RenderScript
 import android.text.Editable
 import android.view.View
 import android.widget.EditText
@@ -102,7 +103,7 @@ class EditTweetActivity : AppCompatActivity() {
                     val channel = NotificationChannel(
                         "todo",
                         "TODO",
-                        NotificationManager.IMPORTANCE_DEFAULT
+                        NotificationManager.IMPORTANCE_HIGH
                     )
                     channel.apply {
                         description = notifiDescription
@@ -152,6 +153,7 @@ class EditTweetActivity : AppCompatActivity() {
                         setContentText(text)
                         addAction(R.drawable.ic_launcher_background, "Done", donePendingIntent)
                         setAutoCancel(false)
+                        setPriority(Notification.PRIORITY_HIGH)
                     }.build()
 
                     notifi.flags = Notification.FLAG_NO_CLEAR
